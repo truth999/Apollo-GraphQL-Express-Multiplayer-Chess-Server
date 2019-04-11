@@ -21,10 +21,11 @@ Add the following environemnt variables to .env:
 
 ```
 DATABASE_URL=[MongoDB url]
+SECRET=[JWT token secret]
 ```
 
 #### 3. Run the server
 
 ```sh
-npm start
+npm run dev
 ```
