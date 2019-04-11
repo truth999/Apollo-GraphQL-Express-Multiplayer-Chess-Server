@@ -13,7 +13,8 @@ const ChessSchema = new mongoose.Schema({
   pgn: String,
   gameOver: Boolean,
   started: Boolean,
-  victoryType: String
+  victoryType: String,
+  winnerID: ObjectId
 });
 
 // eslint-disable-next-line new-cap

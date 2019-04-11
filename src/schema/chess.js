@@ -31,6 +31,8 @@ const chessSchema = gql`
     started: Boolean!
     gameOver: Boolean!
     victoryType: String
+    winnerID: ID
+    winner: User
   }
 `;
 

@@ -36,7 +36,7 @@ function () {
   var _ref3 = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
   _regenerator["default"].mark(function _callee(parent, _ref, _ref2) {
-    var id, move, models, authenticatedUser, game, playerColor, chess, currentTurnColor, moveMade;
+    var id, move, models, authenticatedUser, game, playerColor, chess, currentTurnColor, moveMade, loserColor;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -114,8 +114,13 @@ function () {
             game.gameOver = chess.game_over();
 
             if (game.gameOver === true) {
+              game.endDate = new Date();
+
               if (chess.in_checkmate()) {
-                game.victoryType = 'checkmate';
+                game.victoryType = 'checkmate'; // Record game winner
+
+                loserColor = chess.turn();
+                game.winnerID = game.playerOneColor === loserColor ? game.playerTwoID : game.playerOneID;
               } else if (chess.in_draw()) {
                 game.victoryType = 'draw';
               } else if (chess.in_stalemate()) {

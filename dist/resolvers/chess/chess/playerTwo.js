@@ -27,18 +27,9 @@ function () {
         switch (_context.prev = _context.next) {
           case 0:
             models = _ref.models;
-
-            if (!chessGame.playerTwoID) {
-              _context.next = 3;
-              break;
-            }
-
             return _context.abrupt("return", models.User.findById(chessGame.playerTwoID));
 
-          case 3:
-            return _context.abrupt("return", null);
-
-          case 4:
+          case 2:
           case "end":
             return _context.stop();
         }

@@ -27,7 +27,7 @@ function () {
           case 0:
             id = _ref.id;
             models = _ref2.models;
-            return _context.abrupt("return", models.User.findById(id));
+            return _context.abrupt("return", models.User.findById(id).select('-email'));
 
           case 3:
           case "end":

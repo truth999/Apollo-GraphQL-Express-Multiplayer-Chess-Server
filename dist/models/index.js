@@ -14,7 +14,7 @@ var _user = _interopRequireDefault(require("./user"));
 var _chess = _interopRequireDefault(require("./chess"));
 
 var connectDb = function connectDb() {
-  var dbUrl = process.env.TEST_DATABASE_URL || process.env.DATABASE_URL;
+  var dbUrl = process.env.DATABASE_URL;
   return _mongoose["default"].connect(dbUrl, {
     useNewUrlParser: true
   });

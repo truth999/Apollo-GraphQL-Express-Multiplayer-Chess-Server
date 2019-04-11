@@ -21,7 +21,8 @@ var ChessSchema = new _mongoose["default"].Schema({
   pgn: String,
   gameOver: Boolean,
   started: Boolean,
-  victoryType: String
+  victoryType: String,
+  winnerID: ObjectId
 }); // eslint-disable-next-line new-cap
 
 var Chess = new _mongoose["default"].model('Chess', ChessSchema);

@@ -26,7 +26,7 @@ function () {
         switch (_context.prev = _context.next) {
           case 0:
             models = _ref.models;
-            return _context.abrupt("return", models.User.find());
+            return _context.abrupt("return", models.User.find().select('-email'));
 
           case 2:
           case "end":

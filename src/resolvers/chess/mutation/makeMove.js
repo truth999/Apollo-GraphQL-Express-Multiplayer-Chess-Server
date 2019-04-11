@@ -56,8 +56,13 @@ export default combineResolvers(
     game.gameOver = chess.game_over();
 
     if (game.gameOver === true) {
+      game.endDate = new Date();
       if (chess.in_checkmate()) {
         game.victoryType = 'checkmate';
+
+        // Record game winner
+        const loserColor = chess.turn();
+        game.winnerID = game.playerOneColor === loserColor ? game.playerTwoID : game.playerOneID;
       } else if (chess.in_draw()) {
         game.victoryType = 'draw';
       } else if (chess.in_stalemate()) {
