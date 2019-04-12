@@ -1,4 +1,6 @@
-# Apollo/GraphQL - Chess Multiplayer Game Server
+# Online Multiplayer Chess Game Server - Node.js, Express, Apollo GraphQL
+
+Online multiplayer chess game server built with Node.js, Express and Apollo GraphQL. Feel free to checkout the [client side source code](https://github.com/ratkosolar/React-Apollo-Mutiplayer-Chess-Game) too.
 
 ## Installation
 
