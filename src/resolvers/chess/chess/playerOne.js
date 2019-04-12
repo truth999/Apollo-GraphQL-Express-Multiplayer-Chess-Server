@@ -3,5 +3,5 @@
  * @return {Object} User
  */
 export default async (chessGame, args, { models }) => {
-  return models.User.findById(chessGame.playerOneID);
+  return models.User.findById(chessGame.playerOneID).select('-email');
 };
