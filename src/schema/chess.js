@@ -1,8 +1,16 @@
 import { gql } from 'apollo-server-express';
 
 const chessSchema = gql`
+  input ChessGameFilter {
+    playerID: ID
+    winnerID: ID
+    started: Boolean
+    gameOver: Boolean
+  }
+
   extend type Query {
-    games: [ChessGame!]
+    games(filter: ChessGameFilter, limit: Int, offset: Int): [ChessGame!]
+    gamesCount: Int!
     game(id: ID!): ChessGame
   }
 
