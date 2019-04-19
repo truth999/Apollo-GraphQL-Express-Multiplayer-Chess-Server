@@ -29,6 +29,9 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String
+  },
+  eloRating: {
+    type: Number
   }
 });
 

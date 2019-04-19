@@ -2,7 +2,7 @@ import { combineResolvers } from 'graphql-resolvers';
 import { AuthenticationError, UserInputError } from 'apollo-server';
 import { Chess } from 'chess.js';
 
-import { getPlayerColor } from '../utils';
+import { getPlayerColor, calculateElo } from '../utils';
 import { isAuthenticated } from '../../auth';
 import pubsub from '../../../subscriptions';
 
@@ -45,6 +45,7 @@ export default combineResolvers(
       throw new UserInputError('Not your turn');
     }
 
+    // make move
     const moveMade = chess.move(move);
     if (moveMade === null) {
       throw new Error('Invalid move');
@@ -55,14 +56,43 @@ export default combineResolvers(
     game.pgn = chess.pgn();
     game.gameOver = chess.game_over();
 
+    // game over update
     if (game.gameOver === true) {
       game.endDate = new Date();
+
       if (chess.in_checkmate()) {
         game.victoryType = 'checkmate';
 
         // Record game winner
         const loserColor = chess.turn();
         game.winnerID = game.playerOneColor === loserColor ? game.playerTwoID : game.playerOneID;
+
+        // Calculate new elo ratings
+        const playerOne = await models.User.findById(game.playerOneID);
+        const playerTwo = await models.User.findById(game.playerTwoID);
+
+        const newPlayerOneRating = calculateElo({
+          playerRating: playerOne.eloRating,
+          opponentRating: playerTwo.eloRating,
+          victory: game.winnerID.equals(playerOne.id) ? 1 : 0
+        });
+        const newPlayerTwoRating = calculateElo({
+          playerRating: playerTwo.eloRating,
+          opponentRating: playerOne.eloRating,
+          victory: game.winnerID.equals(playerTwo.id) ? 1 : 0
+        });
+
+        // Update players elo rating
+        await models.User.findByIdAndUpdate(
+          playerOne.id,
+          { eloRating: newPlayerOneRating },
+          { new: true }
+        );
+        await models.User.findByIdAndUpdate(
+          playerTwo.id,
+          { eloRating: newPlayerTwoRating },
+          { new: true }
+        );
       } else if (chess.in_draw()) {
         game.victoryType = 'draw';
       } else if (chess.in_stalemate()) {

@@ -24,7 +24,7 @@ const getAuthenticatedUser = async authHeader => {
     try {
       return jwt.verify(token, process.env.SECRET);
     } catch (e) {
-      return null;
+      throw new AuthenticationError('Not authenticated');
     }
   }
   return null;

@@ -32,6 +32,7 @@ const userSchema = gql`
     firstName: String
     lastName: String
     chessGames: [ChessGame!]
+    eloRating: Float!
     role: String
   }
 `;

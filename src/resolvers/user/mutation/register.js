@@ -1,5 +1,7 @@
 import { createJwtToken } from '../utils';
 
+const START_ELO_RATING = 1200;
+
 /**
  * Create user account
  * @param {String} username
@@ -19,7 +21,8 @@ export default async (
     email,
     password,
     firstName,
-    lastName
+    lastName,
+    eloRating: START_ELO_RATING
   });
 
   return { token: createJwtToken(user, secret, '7d') };
