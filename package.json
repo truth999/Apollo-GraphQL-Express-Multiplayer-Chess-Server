@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint"
   },
-  "author": "Ratko Solar <ratko.solar@gmail.com> (http://ratkosolar.com/)",
+  "author": "Truth Dev",
   "license": "MIT",
   "dependencies": {
     "apollo-server": "^2.4.8",
